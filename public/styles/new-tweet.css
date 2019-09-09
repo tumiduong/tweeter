@@ -1,0 +1,22 @@
+.new-tweet {
+  width: 80%;
+  margin: auto;
+  padding: 30px;
+}
+
+.tweet-box {
+  border: none;
+  border-bottom: 2px solid rgb(29, 139, 116);
+  background-color: #f4f1ec;
+  color: lightgrey;
+  width: 100%;
+  resize: none;
+  padding: 15px;
+}
+
+input {
+  background-color: rgb(29, 139, 116);
+  border: solid 5px rgb(29, 139, 116);
+  color: white;
+  margin: 5px;
+}
