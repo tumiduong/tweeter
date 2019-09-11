@@ -8,7 +8,7 @@
   border: none;
   border-bottom: 2px solid rgb(29, 139, 116);
   background-color: #f4f1ec;
-  color: lightgrey;
+  color: rgb(121, 121, 121);
   width: 100%;
   resize: none;
   padding: 15px;
@@ -19,4 +19,9 @@ input {
   border: solid 5px rgb(29, 139, 116);
   color: white;
   margin: 5px;
+}
+
+.counter {
+  font-weight: 700;
+  color: #414141;
 }
