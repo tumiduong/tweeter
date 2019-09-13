@@ -8,29 +8,39 @@ $( document ).ready(function() {
 
   let $tweetsContainer = $("div#tweets-container");
 
+  const escape =  function(str) {
+    let div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }  
+
   const createTweetElement = (tweet) => {
-    let $tweet = `
-    <article class="tweet">
+    let $tweet =
+    `<article class="tweet">
       <header> 
-        <img src="${tweet.user.avatars}">
-        <p>${tweet.user.name}</p>
-        <p class="user">${tweet.user.handle}</p>
+        <img src="${escape(tweet.user.avatars)}">
+        <p>${escape(tweet.user.name)}</p>
+        <p class="user">${escape(tweet.user.handle)}</p>
       </header>
       
-        <p>${tweet.content.text}</p>
+        <p>${escape(tweet.content.text)}</p>
       
        <footer>
-        <p>${tweet.created_at}</p>
+        <p>${escape(tweet.created_at)}</p>
       </footer>
-    </article>
-    `;
+    </article>`;
     return $tweet;
     }
   
   const renderTweets = function(tweets) {
-    for (const tweet of tweets) {
-    const $tweet = createTweetElement(tweet);
-    $tweetsContainer.append($tweet);
+    if (!Array.isArray(tweets)) {
+      const $tweet = createTweetElement(tweets);
+      $tweetsContainer.prepend($tweet);
+    } else {
+      for (const tweet of tweets) {
+      const $tweet = createTweetElement(tweet);
+      $tweetsContainer.prepend($tweet);
+      }
     }
   }
 
@@ -39,32 +49,48 @@ $( document ).ready(function() {
       method,
       url
     })
-    .done(response => {
-      cb(response);
-    })
+    .done(response => { cb(response) })
     .fail(error => console.log(error))
     .always(() => console.log("load completed."));
   }
 
   loadTweets("GET", "/tweets/", renderTweets);
 
+  const loadLastTweet = (method, url, cb) => {
+    $.ajax({
+      method,
+      url
+    })
+    .done(response => { cb(response[response.length - 1]) })
+    .fail(error => console.log(error))
+    .always(() => console.log("load completed."))
+  }
+
   const tweetForm = $(".new-tweet-form");
 
   tweetForm.on("submit", (event) => {
     console.log("about to submit form")
     event.preventDefault();
-    
-    $.ajax({
-     type: "POST",
-     url: "/tweets/",
-     data: {
-       text: $(".tweet-box").val()
-      }
-    })
-    .done(response => { console.log("done") })
-    .fail(error => { console.log(error) })
-    .always(console.log("completed"))
+
+    if (($(".tweet-box").val()).length <= 140) {
+      $.ajax({
+        type: "POST",
+        url: "/tweets/",
+        data: {
+          text: $(".tweet-box").val()
+         }
+       })
+       .done(response => { loadLastTweet("GET", "/tweets/", renderTweets) })
+       .fail(error => {
+        if (!$(".tweet-box").val()) {
+          alert("Can't tweet unless you write something!");
+        } else {
+          console.log(error)
+        }
+        })
+       .always(console.log("completed"))
+    } else if (($(".tweet-box").val()).length > 140) {
+      alert("Hey! Your message is too long.");
+    }
   })
-
-
 }); //end of doc.ready
