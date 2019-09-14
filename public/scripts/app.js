@@ -143,6 +143,7 @@ $( document ).ready(function() {
           loadLastTweet("GET", "/tweets/", renderTweets);
           tweetForm[0].reset();
           clearError();
+          $("span.counter").text(140);
         })
        .fail(error => {
         if (!$(".tweet-box").val()) {
