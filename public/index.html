@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!-- Meta Information -->
-    <title>Tweeter - Home Page</title>
+    <title>Meowter - Home Page</title>
 
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
@@ -27,27 +27,36 @@
 
     <!-- Top nav bar (fixed) -->
     <nav>
-      <span class="logo">tweeter</span>
-      <span class="write-new"><b>Write</b> a new tweet</span>
+      <span class="logo">meowter</span>
+      <div class="write-new">
+      <span><b>Write</b> a new meowt</span>
+      <img id="toggle-tweet" src="/images/down-arrow.png"> 
+      </div>
     </nav>
 
     <header class="user">
       <div class="avatar">
-          <img src="/images/profile-hex.png"> 
+          <img src="/images/cat-icon.png"> 
       </div>
       <br>
       <div class="name">
-          <h2>Your Name</h2>
+          <h2>Tu Mi</h2>
       </div>
-  </header>
+    </header>
   
 
     <!-- Page-specific (main) content here -->
     <main class="container">
+        <div id="tweet-errors">
+            <p id="long-error"><img src="/images/mad-cat.png"> Whoops! You have a little too much to say.</p>
+            <p id="empty-error"><img src="/images/mad-cat.png"> Yikes. You should have something to say before you try to tweet!</p>
+        </div>
+
+
         <section class="new-tweet">
             <form class="new-tweet-form" method="POST" action="/tweets/">
-              <input class="tweet-box" type="text" placeholder="What are you humming about?">
-              <input type="submit" value="Tweet">
+              <textarea class="tweet-box" name="text" placeholder="What are you purring about?" rows="1"></textarea>
+              <input type="submit" value="Meowt">
               <span class="counter">140</span>
             </form>
           </section>   

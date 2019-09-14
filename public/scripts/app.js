@@ -4,16 +4,26 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
+
+
 $( document ).ready(function() {
 
+  // toggle the "Write a new tweet" button
+  $("#toggle-tweet").click((display) => {
+    $(".new-tweet").slideToggle(display);
+  })
+
+  // writing/displaying tweets
   let $tweetsContainer = $("div#tweets-container");
 
+  // allowing only text in tweet
   const escape =  function(str) {
     let div = document.createElement('div');
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
   }  
 
+  // tweet template
   const createTweetElement = (tweet) => {
     let $tweet =
     `<article class="tweet">
@@ -30,8 +40,9 @@ $( document ).ready(function() {
       </footer>
     </article>`;
     return $tweet;
-    }
+  }
   
+  // iterating through data to print out the tweets
   const renderTweets = function(tweets) {
     if (!Array.isArray(tweets)) {
       const $tweet = createTweetElement(tweets);
@@ -44,6 +55,7 @@ $( document ).ready(function() {
     }
   }
 
+  // loading tweets on page load
   const loadTweets = (method, url, cb) => {
     $.ajax({
       method,
@@ -56,6 +68,7 @@ $( document ).ready(function() {
 
   loadTweets("GET", "/tweets/", renderTweets);
 
+  // loading the last tweet only when submitting new tweet
   const loadLastTweet = (method, url, cb) => {
     $.ajax({
       method,
@@ -66,8 +79,40 @@ $( document ).ready(function() {
     .always(() => console.log("load completed."))
   }
 
+  // new tweet text box
   const tweetForm = $(".new-tweet-form");
+  const $emptyError = $("p#empty-error");
+  const $longError = $("p#long-error");
 
+  // nothing to submit error
+  const tweetEmptyError = () => {
+    if ($emptyError.first().is(":hidden")) {
+      $emptyError.slideToggle();
+      $emptyError.css("display", "flex");
+    }
+  }
+
+  // too many characters error
+  const tweetTooLongError = () => {
+    if ($longError.first().is(":hidden")) {
+      $longError.slideToggle();
+      $longError.css("display", "flex");
+    }
+  }
+
+  // clear errors
+  const clearError = () => {
+    if ($emptyError.first().is(":visible")) {
+      $emptyError.slideUp();
+      $emptyError.css("display", "none");
+    }
+    if ($longError.first().is(":visible")) {
+      $longError.slideUp();
+      $longError.css("display", "none");
+    }
+  }
+
+  // on new tweet submission
   tweetForm.on("submit", (event) => {
     console.log("about to submit form")
     event.preventDefault();
@@ -80,17 +125,24 @@ $( document ).ready(function() {
           text: $(".tweet-box").val()
          }
        })
-       .done(response => { loadLastTweet("GET", "/tweets/", renderTweets) })
+       .done(response => {
+          loadLastTweet("GET", "/tweets/", renderTweets);
+          tweetForm[0].reset();
+          clearError();
+        })
        .fail(error => {
         if (!$(".tweet-box").val()) {
-          alert("Can't tweet unless you write something!");
+          clearError();
+          tweetEmptyError();
         } else {
           console.log(error)
         }
         })
        .always(console.log("completed"))
     } else if (($(".tweet-box").val()).length > 140) {
-      alert("Hey! Your message is too long.");
+      clearError();
+      tweetTooLongError();
     }
   })
+
 }); //end of doc.ready

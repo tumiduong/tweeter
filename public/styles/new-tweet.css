@@ -2,26 +2,59 @@
   width: 80%;
   margin: auto;
   padding: 30px;
+  display: none;
 }
 
-.tweet-box {
+textarea {
   border: none;
-  border-bottom: 2px solid rgb(29, 139, 116);
+  border-bottom: 2px solid rgb(233, 181, 133);
   background-color: #f4f1ec;
   color: rgb(121, 121, 121);
   width: 100%;
   resize: none;
-  padding: 15px;
+  padding: 20px;
 }
 
 input {
-  background-color: rgb(29, 139, 116);
-  border: solid 5px rgb(29, 139, 116);
+  background-color: rgb(233, 181, 133);
+  border: solid 5px rgb(233, 181, 133);
   color: white;
-  margin: 5px;
+  margin-top: 3px;
+  font-weight: bold;
 }
 
 .counter {
   font-weight: 700;
   color: #414141;
+  float: right;
+}
+
+#tweet-errors {
+  width: 75%;
+  margin: auto;
+  margin-top: 10px;
+}
+
+#tweet-errors img {
+  width: 80px;
+  height: auto;
+}
+
+#tweet-errors p {
+  display: flex;
+  align-items: center;
+}
+
+p#long-error {
+  display: none;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 2px dotted rgb(233, 181, 133);
+}
+
+p#empty-error {
+  display: none;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 2px dotted rgb(233, 181, 133);
 }

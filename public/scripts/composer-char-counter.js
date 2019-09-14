@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  const $tweetbox = $("input.tweet-box");
+  const $tweetbox = $(".tweet-box");
 
   $tweetbox.on("keyup", function() {
     let tweetLength = $(this).val().length;

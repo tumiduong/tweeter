@@ -1,23 +1,23 @@
 article.tweet:hover {
   box-shadow: 5px 5px silver;
   opacity: 1;
-  transition: box-shadow 0.5s ease-in-out;
-  color: #414141;
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 article.tweet {
-  border: solid 2px #414141;
-  padding: 25px;
+  border: solid 2px #686662;
+  margin: 15px;
   margin-bottom: 35px;
+  padding: 25px;
 }
 
 article.tweet footer {
   font-size: 15px;
-  border-top: 2px solid #414141;
+  border-top: 2px solid #686662;
 }
 
 article.tweet img {
-  width: 4%;
+  width: 50px;
   height: auto;
 }
 
@@ -28,15 +28,16 @@ article.tweet header {
 
 article.tweet header p {
   flex-grow: 1;
+  padding: 5px;
 }
 
 article.tweet .user {
   display: flex;
   justify-content: flex-end;
-  color: #f4f1ec;
+  opacity: 0;
 }
 
-article.tweet .user:hover {
-  color: #414141;
-  transition: 0.5s ease-in-out;
+article.tweet:hover .user {
+  opacity: 1;
+  transition: 0.7s ease-in-out;
 }

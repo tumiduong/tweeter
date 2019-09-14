@@ -1,17 +1,35 @@
 nav {
   color: #FFFFFF;
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(233, 181, 133);
   height: 120px;
   width: 100%;
   top: 0;
   position: fixed;
   z-index: 1;
   padding: 1.5em;
-  display: flex;
-  justify-content: space-between;
+
+}
+
+.write-new {
+  float: right;
 }
 
 .logo {
   font-family: 'Bungee', cursive;
   font-size: xx-large;
+}
+
+.write-new img {
+  background-color: rgb(233, 181, 133);
+  width: 25px;
+  height: auto;
+  margin: auto;
+  border: none;
+  transition: transform 0.7s;
+  display: flex;
+  align-self: flex-end;
+}
+
+.write-new img:hover {
+  transform: translate(0, 10px)
 }
