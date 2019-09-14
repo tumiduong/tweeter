@@ -25,3 +25,12 @@ main {
   width: 90%;
   margin: auto;
 }
+
+
+@media only screen and (min-width: 1024px) {
+  main {
+    width: 65%;
+    float: right;
+    margin-top: 120px;
+  }
+}
