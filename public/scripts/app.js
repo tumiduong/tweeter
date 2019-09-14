@@ -23,6 +23,15 @@ $( document ).ready(function() {
     return div.innerHTML;
   }  
 
+  // finding 'days ago' function
+  const daysAgo = (ms) => {
+    let today = Date.now();
+    let oneDay = 86400000;
+    let timeDiff = today - ms;
+    let daysPassed = timeDiff / oneDay;
+    return Math.round(daysPassed);
+  }
+
   // tweet template
   const createTweetElement = (tweet) => {
     let $tweet =
@@ -36,7 +45,12 @@ $( document ).ready(function() {
         <p>${escape(tweet.content.text)}</p>
       
        <footer>
-        <p>${escape(tweet.created_at)}</p>
+        <p>${escape(daysAgo(tweet.created_at))} days ago
+        <img src="/images/report.png">
+        <img src="/images/retweet.png">
+        <img src="/images/fave.png">
+        </p>
+        
       </footer>
     </article>`;
     return $tweet;

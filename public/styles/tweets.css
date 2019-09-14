@@ -1,7 +1,6 @@
 article.tweet:hover {
   box-shadow: 5px 5px silver;
   opacity: 1;
-  transition: box-shadow 0.3s ease-in-out;
 }
 
 article.tweet {
@@ -9,6 +8,7 @@ article.tweet {
   margin: 15px;
   margin-bottom: 35px;
   padding: 25px;
+  transition: 0.5s ease-in-out;
 }
 
 article.tweet footer {
@@ -16,7 +16,7 @@ article.tweet footer {
   border-top: 2px solid #686662;
 }
 
-article.tweet img {
+article.tweet header img {
   width: 50px;
   height: auto;
 }
@@ -35,9 +35,24 @@ article.tweet .user {
   display: flex;
   justify-content: flex-end;
   opacity: 0;
+  transition: 0.5s ease-in-out;
 }
 
 article.tweet:hover .user {
   opacity: 1;
-  transition: 0.7s ease-in-out;
+  
+}
+
+footer p img {
+  width: 20px;
+  height: auto;
+  float: right;
+  margin: auto;
+  margin-left: 10px;
+  opacity: 0;
+  transition: 0.5s ease-in-out;
+}
+
+article.tweet:hover footer img {
+  opacity: 1;
 }
